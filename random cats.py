@@ -5,6 +5,8 @@ import discord
 from auth_data import DC_TOKEN
 TOKEN = DC_TOKEN
 
+import datetime
+
 client = discord.Client()
 
 
@@ -18,10 +20,12 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-    if "кот" in message.content.lower():
-        response = requests.get("https://api.thecatapi.com/v1/images/search")
-        data = response.json()
+    if "set_timer" in message.content.lower():
+        hour = int(message.content.lower().split()[2])
+        hour = int(message.content.lower().split()[4])
+
         await message.channel.send(data[0]['url'])
+        date = datetime.datetime.now()
     dogs = [
         "пес", "пёс", "собак", "собач", "бобик", "тузик", "полкан"
     ]
